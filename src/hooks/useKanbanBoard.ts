@@ -49,9 +49,14 @@ export const useKanbanBoard = () => {
         }),
       });
 
-      if (!response.ok) throw new Error("Failed to move task");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to move task");
+      }
+
       await fetchColumns();
     } catch (err: any) {
+      console.error("Error moving task:", err);
       setError(err.message);
     }
   };
@@ -60,5 +65,11 @@ export const useKanbanBoard = () => {
     fetchColumns();
   }, []);
 
-  return { columns, loading, error, updateTaskColumn };
+  return {
+    columns,
+    loading,
+    error,
+    updateTaskColumn,
+    refreshBoard: fetchColumns,
+  };
 };
