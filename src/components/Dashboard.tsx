@@ -1,9 +1,15 @@
-import { useState } from "react";
+// src/components/KanbanBoard.tsx
+import { useEffect } from "react";
 import { PlusIcon, XIcon } from "lucide-react";
 import { useKanbanBoard } from "@/hooks/useKanbanBoard";
 
 const KanbanBoard = () => {
   const { columns, loading, error, updateTaskColumn } = useKanbanBoard();
+
+  // Log initial columns data
+  useEffect(() => {
+    console.log("Columns data:", columns);
+  }, [columns]);
 
   const handleDragStart = (
     e: React.DragEvent,
@@ -25,6 +31,8 @@ const KanbanBoard = () => {
 
     if (sourceColumnId === targetColumnId) return;
     await updateTaskColumn(taskId, targetColumnId);
+
+    console.log("Task dropped:", taskId, sourceColumnId, targetColumnId);
   };
 
   if (loading) {

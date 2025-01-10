@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import type { WorkspaceFormData } from "@/types";
+import { useOrganizations } from "@/hooks/useOrganizations";
 
 interface CreateWorkspaceModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (workspaceData: WorkspaceFormData) => void;
-}
-
-// interface WorkspaceFormData {
-//   organization: string;
-//   workspaceName: string;
-//   description: string;
-//   icon: string;
-// }
-
-interface Organization {
-  id: string;
-  name: string;
 }
 
 const WORKSPACE_ICONS = [
@@ -61,37 +49,12 @@ const CreateWorkspaceModal = ({
 }: CreateWorkspaceModalProps) => {
   const [formData, setFormData] = useState<WorkspaceFormData>({
     organization_id: "",
-
     name: "",
     description: "",
     icon: "📁", // Default icon
   });
 
-  const [organizations, setOrganizations] = useState<Organization[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchOrganizations = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("organizations")
-          .select("id, name")
-          .order("name");
-
-        if (error) throw error;
-        setOrganizations(data || []);
-        console.log("Organizations 2:", data);
-      } catch (err) {
-        console.error("Error fetching organizations:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (isOpen) {
-      fetchOrganizations();
-    }
-  }, [isOpen]);
+  const { organizations, loading } = useOrganizations();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -117,7 +80,6 @@ const CreateWorkspaceModal = ({
     onSave(formData);
     setFormData({
       organization_id: "",
-
       name: "",
       description: "",
       icon: "📁",

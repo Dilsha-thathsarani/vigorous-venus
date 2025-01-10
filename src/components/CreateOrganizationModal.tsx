@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import type { OrganizationFormData } from "@/types";
 
 interface CreateOrganizationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (organizationData: OrganizationFormData) => void;
-}
-
-interface OrganizationFormData {
-  name: string;
-  description: string;
 }
 
 const CreateOrganizationModal = ({
@@ -36,7 +31,7 @@ const CreateOrganizationModal = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
-    setFormData({ name: "", description: "" }); // Reset form
+    setFormData({ name: "", description: "" });
     onClose();
   };
 

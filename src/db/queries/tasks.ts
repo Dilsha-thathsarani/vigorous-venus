@@ -16,7 +16,7 @@ export const taskQueries = {
       .order("order_index");
 
     if (error) throw error;
-    return data;
+    console.log(data);
   },
 
   async getByColumn(columnId: string) {

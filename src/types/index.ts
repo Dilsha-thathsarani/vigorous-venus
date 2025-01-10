@@ -19,6 +19,7 @@ export interface Task {
 }
 
 export interface Column {
+  tasks: any;
   id: string;
   board_id: string;
   title: string;
@@ -54,6 +55,8 @@ export interface Board {
 }
 
 export interface Workspace {
+  icon: string;
+  organization_id: string;
   id: string;
   name: string;
   description?: string | null | undefined;
