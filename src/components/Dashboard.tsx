@@ -146,7 +146,6 @@ const KanbanBoard = () => {
           <div className="flex justify-between items-center p-4 border-b bg-white">
             <div className="flex items-center gap-4">
               <h1 className="text-2xl font-semibold">Tasks</h1>
-              <div className="text-sm text-blue-600">1 sort rule</div>
             </div>
             <div className="flex gap-2">
               <button
