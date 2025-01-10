@@ -12,20 +12,3 @@ if (!connectionString) {
 // Create a Postgres client for Drizzle
 const client = postgres(connectionString);
 export const db = drizzle(client, { schema });
-
-// // Test function to query organizations table
-// async function testQuery() {
-//   try {
-//     console.log("Testing database connection...");
-//     const orgs = await db.select().from(organizations);
-//     console.log("Organizations found:", orgs);
-//   } catch (error) {
-//     console.error("Database query failed:", error);
-//   }
-// }
-
-// // Run the test
-// testQuery();
-
-// // Export both db and test function
-// export { testQuery };

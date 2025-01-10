@@ -131,7 +131,7 @@ export const POST: APIRoute = async ({ request }) => {
         title: body.title,
         description: body.description,
         column_id: body.column_id,
-        order_index: body.order_index,
+        order_index: body.order_index || 0,
         assignee_id: body.assignee_id || null,
         task_window_start: body.task_window_start
           ? new Date(body.task_window_start)
@@ -140,6 +140,7 @@ export const POST: APIRoute = async ({ request }) => {
           ? new Date(body.task_window_deadline)
           : null,
         priority: body.priority || null,
+        created_by: "083afd73-7896-49c0-afcf-aec2d2e53d14", // You should get this from your auth system
         created_at: new Date(),
         updated_at: new Date(),
       })

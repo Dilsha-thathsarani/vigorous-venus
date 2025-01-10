@@ -150,10 +150,7 @@ const KanbanBoard = () => {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => {
-                  setSelectedColumnId(columns[0]?.id || ""); // Default to first column
-                  setIsAddModalOpen(true);
-                }}
+                onClick={() => setIsAddModalOpen(true)}
                 className="p-2 hover:bg-gray-200 rounded"
                 aria-label="Add new task"
               >
@@ -251,7 +248,6 @@ const KanbanBoard = () => {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onSave={handleAddTask}
-        columnId={selectedColumnId}
       />
       <TaskDetailModal
         isOpen={selectedTask !== null}
